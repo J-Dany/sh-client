@@ -6,11 +6,14 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Theme,
+  useMediaQuery,
 } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { SidebarContext } from '@/src/components/client/context/SidebarContext';
 
 export interface SidebarMenuItemProps {
   children: (open: boolean) => React.ReactNode;
@@ -25,9 +28,23 @@ export function SidebarMenuItem({
   recursion,
   drawerOpen,
 }: SidebarMenuItemProps) {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [pushed, setPushed] = useState(false);
+  const router = useRouter();
   const hasSubItems = !!item.subItems && item.subItems.length > 0;
+  const sidebarContext = useContext(SidebarContext);
+  const pathname = usePathname();
+  const isNotLg = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
+
+  useEffect(() => {
+    if (isNotLg && pushed) {
+      sidebarContext.setOpen(false);
+    }
+
+    return () => {
+      setPushed(false);
+    };
+  }, [pushed, pathname, isNotLg, item, sidebarContext]);
 
   return (
     <ListItem disablePadding sx={{ display: 'block' }}>
@@ -37,10 +54,12 @@ export function SidebarMenuItem({
             setOpen(!open);
           } else {
             router.push(item.path);
+            setTimeout(() => {
+              setPushed(true);
+            }, 0);
           }
         }}
         sx={{
-          minHeight: 48,
           justifyContent: 'initial',
         }}
       >
@@ -48,7 +67,7 @@ export function SidebarMenuItem({
           sx={{
             minWidth: 0,
             ml: recursion * 2,
-            mr: 2 + recursion * 2,
+            mr: 2,
             justifyContent: 'center',
           }}
         >

@@ -21,6 +21,11 @@ const menu: Shell.Menu.Item[] = [
       },
     ],
   },
+  {
+    label: 'Impostazioni',
+    path: '/settings',
+    icon: 'settings',
+  }
 ];
 
 export default menu;

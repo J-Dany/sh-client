@@ -1,6 +1,8 @@
 'use client';
 
-import { Drawer, DrawerProps, Hidden, HiddenProps } from '@mui/material';
+import { Drawer, DrawerProps, Hidden, HiddenProps, Box } from '@mui/material';
+import Image from 'next/image';
+import logo from '@/app/icon.png';
 
 export interface ResponsiveDrawerProps {
   children: React.ReactNode;
@@ -29,6 +31,29 @@ export default function ResponsiveDrawer({
         }}
         {...props}
       >
+        <Box
+          position={'relative'}
+          height={{
+            lg: 128,
+            xs: 90,
+          }}
+          marginX={1}
+          marginY={2}
+          sx={{
+            filter: 'grayscale(1)',
+            '&:hover': {
+              filter: 'grayscale(0)',
+            },
+          }}
+        >
+          <Image
+            fill
+            objectFit='contain'
+            objectPosition='left'
+            alt='Shell | Daniele Castiglia'
+            src={logo}
+          />
+        </Box>
         {children}
       </Drawer>
     </Hidden>
