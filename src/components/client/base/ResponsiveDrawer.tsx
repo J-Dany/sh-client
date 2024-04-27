@@ -47,11 +47,15 @@ export default function ResponsiveDrawer({
           }}
         >
           <Image
+            priority
             fill
-            objectFit='contain'
-            objectPosition='left'
+            sizes='100% 100%'
             alt='Shell | Daniele Castiglia'
             src={logo}
+            style={{
+              objectFit: 'contain',
+              objectPosition: 'left',
+            }}
           />
         </Box>
         {children}
