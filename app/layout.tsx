@@ -3,18 +3,21 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import theme from '@/theme';
 import AppContainer from '@/src/components/client/AppContainer';
 import menu from '@/app/menu';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import getIronServerSession from '@/src/hooks/server/getIronServerSession';
 
 export const metadata: Metadata = {
-  title: 'Sh',
-  description: 'Sh | Daniele Castiglia',
+  title: 'Shell',
+  description: 'Shell | Daniele Castiglia',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getIronServerSession();
+
   return (
     <html lang='en'>
       <head>
@@ -24,13 +27,21 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <AppRouterCacheProvider options={{
-          nonce: 'nonce',
-        }}>
+        <AppRouterCacheProvider
+          options={{
+            nonce: 'nonce',
+          }}
+        >
           <CssBaseline />
-          <AppContainer theme={theme} title={'Shell'} menu={menu}>
-            {children}
-          </AppContainer>
+          <ThemeProvider theme={theme}>
+            {session.accessToken ? (
+              <AppContainer theme={theme} title={'Shell'} menu={menu}>
+                {children}
+              </AppContainer>
+            ) : (
+              children
+            )}
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>
