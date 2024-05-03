@@ -3,25 +3,23 @@
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useCallback, useState } from 'react';
 import { createTheme, Paper, Theme, ThemeProvider } from '@mui/material';
-import DrawerFooter from '@/src/components/client/base/DrawerFooter';
 import ResponsiveDrawer from '@/src/components/client/base/ResponsiveDrawer';
-import { SidebarMenu } from '@/src/components/client/base/SidebarMenu';
 import SidebarProvider from './context/SidebarContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import DrawerContent from '@/src/components/client/base/DrawerContent';
 
 let updateThemeModeCalled = false;
 
 export interface SidebarProps {
   children: React.ReactNode;
   title: string;
-  menu?: Shell.Menu.Item[];
+  menu?: Shell.Menu.Group[];
   theme: Theme;
 }
 
@@ -114,17 +112,11 @@ export default function AppContainer({
             onClose={() => setOpen(false)}
             HiddenProps={{ lgUp: true }}
           >
-            <List>
-              <SidebarMenu drawerOpen={open} menu={menu} recursion={0} />
-            </List>
-            <DrawerFooter />
+            <DrawerContent menu={menu} drawerOpen={open} />
           </ResponsiveDrawer>
           {/* DESKTOP */}
           <ResponsiveDrawer variant='permanent' HiddenProps={{ lgDown: true }}>
-            <List>
-              <SidebarMenu drawerOpen={true} menu={menu} recursion={0} />
-            </List>
-            <DrawerFooter />
+            <DrawerContent drawerOpen menu={menu} />
           </ResponsiveDrawer>
           <Paper
             square

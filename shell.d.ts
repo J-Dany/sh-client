@@ -9,6 +9,11 @@ declare namespace Shell {
   }
 
   export namespace Menu {
+    export interface Group {
+      label?: string;
+      items: Item[];
+    }
+
     export interface Item {
       label: string;
       path: string;

@@ -3,6 +3,7 @@
 import { Drawer, DrawerProps, Hidden, HiddenProps, Box } from '@mui/material';
 import Image from 'next/image';
 import logo from '@/app/icon.png';
+import DrawerFooter from './DrawerFooter';
 
 export interface ResponsiveDrawerProps {
   children: React.ReactNode;
@@ -58,7 +59,22 @@ export default function ResponsiveDrawer({
             }}
           />
         </Box>
-        {children}
+        <Box
+          sx={{
+            height: '100%',
+            overflowY: 'auto',
+            '&::-webkit-scrollbar': {
+              width: '0.4em',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            },
+            marginBottom: ({ spacing }) => spacing(2),
+          }}
+        >
+          {children}
+        </Box>
+        <DrawerFooter />
       </Drawer>
     </Hidden>
   );
