@@ -14,6 +14,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { usePathname, useRouter } from 'next/navigation';
 import { SidebarContext } from '@/src/components/client/context/SidebarContext';
+import { yellow } from '@mui/material/colors';
 
 export interface SidebarMenuItemProps {
   children: (open: boolean) => React.ReactNode;
@@ -77,6 +78,9 @@ export function SidebarMenuItem({
           primary={item.label}
           sx={{ opacity: drawerOpen ? 1 : 0 }}
         />
+        {item.isPremium ? (
+          <Icon sx={{ fill: yellow[800], color: yellow[800], fontSize: '14px' }}>star</Icon>
+        ) : null}
         {hasSubItems ? (
           open ? (
             <ExpandLessIcon sx={{ opacity: 0.6 }} />

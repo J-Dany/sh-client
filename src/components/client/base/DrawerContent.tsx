@@ -29,13 +29,13 @@ export default function DrawerContent({
     return (
       <Box
         key={label}
-        sx={{ marginTop: i > 0 ? ({ spacing }) => spacing(2) : 0 }}
+        sx={{ marginTop: ({ spacing }) => spacing(1) }}
       >
         <Typography
           variant='overline'
           sx={{
             paddingLeft: 2,
-            opacity: 0.7,
+            opacity: 0.5,
             display: 'inline-block',
           }}
         >

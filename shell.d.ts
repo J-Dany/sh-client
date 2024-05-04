@@ -17,6 +17,7 @@ declare namespace Shell {
     export interface Item {
       label: string;
       path: string;
+      isPremium?: boolean;
       icon?: string;
       subItems?: Item[];
     }

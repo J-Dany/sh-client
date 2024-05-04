@@ -22,6 +22,12 @@ const menu: Shell.Menu.Group[] = [
             path: '/url-shortener/short',
             icon: 'edit',
           },
+          {
+            label: 'Dominio custom',
+            path: '/url-shortener/custom-domain',
+            icon: 'domain',
+            isPremium: true,
+          },
         ],
       },
     ],
@@ -30,14 +36,14 @@ const menu: Shell.Menu.Group[] = [
     label: 'Sistema',
     items: [
       {
+        label: 'Diventa premium',
+        path: '/premium',
+        icon: 'star',
+      },
+      {
         label: 'Impostazioni',
         path: '/settings',
         icon: 'settings',
-      },
-      {
-        label: 'Informazioni',
-        path: '/info',
-        icon: 'info',
       },
     ],
   },

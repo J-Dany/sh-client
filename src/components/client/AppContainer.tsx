@@ -54,8 +54,8 @@ export default function AppContainer({
           success: prev.palette.success,
         },
       });
-      console.log('theme', theme);
 
+      localStorage.setItem('mui-mode', theme.palette.mode);
       return theme;
     });
   }, []);

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import theme from '@/theme';
 import AppContainer from '@/src/components/client/AppContainer';
 import menu from '@/app/menu';
