@@ -1,5 +1,6 @@
 import constructOidcTokenUrl from '@/src/hooks/server/constructOidcTokenUrl';
-import getIronServerSession from '@/src/hooks/server/getIronServerSession';
+import { getIronSessionFromCookiesStore } from '@/src/hooks/server/getIronServerSession';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest } from 'next/server';
 
@@ -28,7 +29,9 @@ export async function GET(request: NextRequest) {
     })
   ).json();
 
-  const session = await getIronServerSession(data.refresh_expires_in as number);
+  console.log("data", data);
+
+  const session = await getIronSessionFromCookiesStore(cookies());
 
   session.expiresAt = Date.now() + data.expires_in * 1000;
   session.accessToken = data.access_token;

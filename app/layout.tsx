@@ -4,7 +4,8 @@ import theme from '@/theme';
 import AppContainer from '@/src/components/client/AppContainer';
 import menu from '@/app/menu';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import getIronServerSession from '@/src/hooks/server/getIronServerSession';
+import { getIronSessionFromCookiesStore } from '@/src/hooks/server/getIronServerSession';
+import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'Shell',
@@ -16,7 +17,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getIronServerSession();
+  const session = await getIronSessionFromCookiesStore(cookies());
 
   return (
     <html lang='en'>
